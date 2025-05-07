@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en" data-bs-theme="semi-dark">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Operator</title>
+	<!--favicon-->
+	<link rel="icon" href="../assets/images/favicon-32x32.png" type="image/png">
+	<!-- loader-->
+	<link href="../assets/css/pace.min.css" rel="stylesheet">
+	<script src="../assets/js/pace.min.js"></script>
+
+	<!--plugins-->
+	<link href="../assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../assets/plugins/metismenu/metisMenu.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/plugins/metismenu/mm-vertical.css">
+	<link rel="stylesheet" type="text/css" href="../assets/plugins/simplebar/css/simplebar.css">
+	<!--bootstrap css-->
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+	<!--main css-->
+	<link href="../assets/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="../sass/main.css" rel="stylesheet">
+	<link href="../sass/dark-theme.css" rel="stylesheet">
+	<link href="../sass/blue-theme.css" rel="stylesheet">
+	<link href="../sass/semi-dark.css" rel="stylesheet">
+	<link href="../sass/bordered-theme.css" rel="stylesheet">
+	<link href="../sass/responsive.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+	<style>
+		.client-header {
+			background-color: #5dd8f6;
+			padding: 1rem;
+		}
+
+		.client-header h1 {
+			margin: 0;
+			font-size: 1.25rem;
+			font-weight: 500;
+		}
+
+		.reference-number {
+			color: #5dd8f6;
+			font-weight: 500;
+		}
+
+		.copy-btn {
+			height: 2rem;
+			width: 2rem;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.verified-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.25rem;
+			color: #198754;
+			font-size: 0.875rem;
+		}
+
+		.search-btn {
+			background-color: #5dd8f6;
+			border: none;
+			color: black;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.5rem 1rem;
+		}
+
+		.search-btn:hover {
+			background-color: #4cc5e3;
+			color: black;
+		}
+
+		/* Make readonly inputs look disabled */
+		.form-control[readonly] {
+			background-color: #f8f9fa;
+		}
+
+		/* Add some spacing between form groups */
+		.form-label {
+			margin-bottom: 0.5rem;
+		}
+
+		.avatar-small {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		.video-container {
+			position: relative;
+			height: calc(100vh - 250px);
+			background-color: #f8f9fa;
+			overflow: hidden;
+			padding: 60px;
+		}
+
+		.main-user {
+			width: 100%;
+			height: 100%;
+		}
+
+		.main-video {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		.user-thumbnail {
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+			border: 2px solid white;
+			border-radius: 4px;
+			overflow: hidden;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 6px;
+		}
+
+		.user-thumbnail img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.control-button {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #f8f9fa;
+			border: 1px solid #dee2e6;
+		}
+
+		.end-call-button {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #dc3545;
+			color: white;
+			border: none;
+		}
+
+		.timer {
+			font-size: 24px;
+			font-weight: 500;
+			color: #212529;
+		}
+
+
+
+
+		.operator .header {
+			background-color: #00a0c6;
+			color: white;
+			padding: 8px 15px;
+			font-weight: 500;
+		}
+
+		.operator .caller-info {
+			padding: 8px 15px;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		.operator .caller-number {
+			color: #00a0c6;
+			font-weight: 500;
+			background: #ECFFF8;
+			padding: 4px;
+		}
+
+		.operator .video-container {
+			position: relative;
+			height: calc(100vh - 150px);
+			border-right: 1px solid #dee2e6;
+		}
+
+		.operator .main-video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.operator .video-overlay {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 12px;
+		}
+
+		.operator .name-overlay {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 12px;
+		}
+
+		.operator .thumbnails {
+			position: absolute;
+			bottom: 10px;
+			left: 10px;
+			right: 10px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.operator .thumbnail {
+			position: relative;
+			width: 130px;
+			height: 90px;
+			border: 2px solid white;
+			border-radius: 4px;
+			overflow: hidden;
+		}
+
+		.operator .thumbnail img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.operator .thumbnail-name {
+			position: absolute;
+			bottom: 5px;
+			left: 5px;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+			padding: 2px 4px;
+			border-radius: 2px;
+			font-size: 10px;
+		}
+
+		.operator .call-controls {
+			position: absolute;
+			bottom: 110px;
+			left: 0;
+			right: 0;
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		.operator .btn-circle {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.operator .btn-end-call {
+			background-color: #f15b5b;
+			border-color: #f15b5b;
+			color: white;
+			padding: 6px 20px;
+			border-radius: 20px;
+		}
+
+		.operator .btn-end-call:hover {
+			background-color: #e04a4a;
+			border-color: #e04a4a;
+		}
+
+		.operator .btn-wrong-call {
+			background-color: #f0ad4e;
+			border-color: #f0ad4e;
+			color: white;
+		}
+
+		.operator .btn-wrong-call:hover {
+			background-color: #ec971f;
+			border-color: #ec971f;
+		}
+
+		.operator .btn-language-line {
+			background-color: #5bc0de;
+			border-color: #5bc0de;
+			color: white;
+		}
+
+		.operator .btn-language-line:hover {
+			background-color: #46b8da;
+			border-color: #46b8da;
+		}
+
+		.operator .btn-complete-call {
+			background-color: #5cb85c;
+			border-color: #5cb85c;
+			color: white;
+		}
+
+		.operator .btn-complete-call:hover {
+			background-color: #4cae4c;
+			border-color: #4cae4c;
+		}
+
+		.operator .tab-header {
+			background-color: #f8f9fa;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		.operator .custom-tab {
+			padding: 10px 15px;
+			background-color: transparent;
+			border: none;
+			border-radius: 0;
+			color: #495057;
+		}
+
+		.operator .custom-tab.active {
+			background-color: #00a0c6;
+			color: white;
+		}
+
+		.operator .interpreter-list {
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+		.operator .interpreter-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 8px;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		.operator .status-dot {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background-color: #5cb85c;
+			border-radius: 50%;
+			margin-right: 8px;
+		}
+
+		.operator .interpreter-name {
+			color: #00a0c6;
+		}
+
+		.operator .section-header {
+			background-color: #00a0c6;
+			color: white;
+			padding: 8px 15px;
+			font-weight: 500;
+		}
+
+		.operator .section-content {
+			padding: 8px 15px;
+		}
+
+		.operator .table-header {
+			display: flex;
+			justify-content: space-between;
+			padding: 8px 15px;
+			border-top: 1px solid #dee2e6;
+			font-size: 14px;
+			color: #6c757d;
+		}
+
+		.incoming {
+			background: #fff;
+			border-radius: 10px;
+		}
+
+		.fixed-scroll {
+			height: 81vh;
+			overflow-y: scroll;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!--start header-->
+	<header class="top-header">
+		<nav class="navbar navbar-expand align-items-center gap-4">
+			<div class="btn-toggle">
+				<a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
+			</div>
+			<div class="search-bar flex-grow-1">
+				<div class="position-relative">
+					<input class="form-control rounded-5 px-5 search-control d-lg-block d-none" type="text"
+						placeholder="Search">
+					<span
+						class="material-icons-outlined position-absolute d-lg-block d-none ms-3 translate-middle-y start-0 top-50">search</span>
+					<span
+						class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 search-close">close</span>
+					<div class="search-popup p-3">
+						<div class="card rounded-4 overflow-hidden">
+							<div class="card-header d-lg-none">
+								<div class="position-relative">
+									<input class="form-control rounded-5 px-5 mobile-search-control" type="text"
+										placeholder="Search">
+									<span
+										class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50">search</span>
+									<span
+										class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 mobile-search-close">close</span>
+								</div>
+							</div>
+							<div class="card-body search-content">
+								<p class="search-title">Recent Searches</p>
+								<div class="d-flex align-items-start flex-wrap gap-2 kewords-wrapper">
+									<a href="javascript:;" class="kewords"><span>Angular Template</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>Dashboard</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>Admin Template</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>Bootstrap 5 Admin</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>Html eCommerce</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>Sass</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+									<a href="javascript:;" class="kewords"><span>laravel 9</span><i
+											class="material-icons-outlined fs-6">search</i></a>
+								</div>
+								<hr>
+								<p class="search-title">Tutorials</p>
+								<div class="search-list d-flex flex-column gap-2">
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="list-icon">
+											<i class="material-icons-outlined fs-5">play_circle</i>
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title ">Wordpress Tutorials</h5>
+										</div>
+									</div>
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="list-icon">
+											<i class="material-icons-outlined fs-5">shopping_basket</i>
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title">eCommerce Website Tutorials</h5>
+										</div>
+									</div>
+
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="list-icon">
+											<i class="material-icons-outlined fs-5">laptop</i>
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title">Responsive Design</h5>
+										</div>
+									</div>
+								</div>
+
+								<hr>
+								<p class="search-title">Members</p>
+
+								<div class="search-list d-flex flex-column gap-2">
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="memmber-img">
+											<img src="../assets/images/avatars/01.png" width="32" height="32"
+												class="rounded-circle" alt="">
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title ">Andrew Stark</h5>
+										</div>
+									</div>
+
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="memmber-img">
+											<img src="../assets/images/avatars/02.png" width="32" height="32"
+												class="rounded-circle" alt="">
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title ">Snetro Jhonia</h5>
+										</div>
+									</div>
+
+									<div class="search-list-item d-flex align-items-center gap-3">
+										<div class="memmber-img">
+											<img src="../assets/images/avatars/03.png" width="32" height="32"
+												class="rounded-circle" alt="">
+										</div>
+										<div class="">
+											<h5 class="mb-0 search-list-title">Michle Clark</h5>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="card-footer text-center bg-transparent">
+								<a href="javascript:;" class="btn w-100">See All Search Results</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="navbar-nav gap-1 nav-right-links align-items-center">
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
+						data-bs-auto-close="outside" data-bs-toggle="dropdown" href="javascript:;"><i
+							class="material-icons-outlined">notifications</i>
+						<span class="badge-notify">5</span>
+					</a>
+					<div class="dropdown-menu dropdown-notify dropdown-menu-end shadow">
+						<div class="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
+							<h5 class="notiy-title mb-0">Notifications</h5>
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle dropdown-toggle-nocaret option"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<span class="material-icons-outlined">
+										more_vert
+									</span>
+								</button>
+								<div class="dropdown-menu dropdown-option dropdown-menu-end shadow">
+									<div><a class="dropdown-item d-flex align-items-center gap-2 py-2"
+											href="javascript:;"><i
+												class="material-icons-outlined fs-6">inventory_2</i>Archive All</a>
+									</div>
+									<div><a class="dropdown-item d-flex align-items-center gap-2 py-2"
+											href="javascript:;"><i class="material-icons-outlined fs-6">done_all</i>Mark
+											all as read</a></div>
+									<div><a class="dropdown-item d-flex align-items-center gap-2 py-2"
+											href="javascript:;"><i
+												class="material-icons-outlined fs-6">mic_off</i>Disable
+											Notifications</a></div>
+									<div><a class="dropdown-item d-flex align-items-center gap-2 py-2"
+											href="javascript:;"><i class="material-icons-outlined fs-6">grade</i>What's
+											new ?</a></div>
+									<div>
+										<hr class="dropdown-divider">
+									</div>
+									<div><a class="dropdown-item d-flex align-items-center gap-2 py-2"
+											href="javascript:;"><i
+												class="material-icons-outlined fs-6">leaderboard</i>Reports</a></div>
+								</div>
+							</div>
+						</div>
+						<div class="notify-list">
+							<div>
+								<a class="dropdown-item border-bottom py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="">
+											<img src="../assets/images/avatars/01.png" class="rounded-circle" width="45"
+												height="45" alt="">
+										</div>
+										<div class="">
+											<h5 class="notify-title">Congratulations Jhon</h5>
+											<p class="mb-0 notify-desc">Many congtars jhon. You have won the gifts.</p>
+											<p class="mb-0 notify-time">Today</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div>
+								<a class="dropdown-item border-bottom py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="user-wrapper bg-primary text-primary bg-opacity-10">
+											<span>RS</span>
+										</div>
+										<div class="">
+											<h5 class="notify-title">New Account Created</h5>
+											<p class="mb-0 notify-desc">From USA an user has registered.</p>
+											<p class="mb-0 notify-time">Yesterday</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div>
+								<a class="dropdown-item border-bottom py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="">
+											<img src="../assets/images/apps/13.png" class="rounded-circle" width="45"
+												height="45" alt="">
+										</div>
+										<div class="">
+											<h5 class="notify-title">Payment Recived</h5>
+											<p class="mb-0 notify-desc">New payment recived successfully</p>
+											<p class="mb-0 notify-time">1d ago</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div>
+								<a class="dropdown-item border-bottom py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="">
+											<img src="../assets/images/apps/14.png" class="rounded-circle" width="45"
+												height="45" alt="">
+										</div>
+										<div class="">
+											<h5 class="notify-title">New Order Recived</h5>
+											<p class="mb-0 notify-desc">Recived new order from michle</p>
+											<p class="mb-0 notify-time">2:15 AM</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div>
+								<a class="dropdown-item border-bottom py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="">
+											<img src="../assets/images/avatars/06.png" class="rounded-circle" width="45"
+												height="45" alt="">
+										</div>
+										<div class="">
+											<h5 class="notify-title">Congratulations Jhon</h5>
+											<p class="mb-0 notify-desc">Many congtars jhon. You have won the gifts.</p>
+											<p class="mb-0 notify-time">Today</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div>
+								<a class="dropdown-item py-2" href="javascript:;">
+									<div class="d-flex align-items-center gap-3">
+										<div class="user-wrapper bg-danger text-danger bg-opacity-10">
+											<span>PK</span>
+										</div>
+										<div class="">
+											<h5 class="notify-title">New Account Created</h5>
+											<p class="mb-0 notify-desc">From USA an user has registered.</p>
+											<p class="mb-0 notify-time">Yesterday</p>
+										</div>
+										<div class="notify-close position-absolute end-0 me-3">
+											<i class="material-icons-outlined fs-6">close</i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+						<img src="../assets/images/avatars/01.png" class="rounded-circle p-1 border" width="45"
+							height="45" alt="">
+					</a>
+					<div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
+						<a class="dropdown-item  gap-2 py-2" href="javascript:;">
+							<div class="text-center">
+								<img src="../assets/images/avatars/01.png" class="rounded-circle p-1 shadow mb-3"
+									width="90" height="90" alt="">
+								<h5 class="user-name mb-0 fw-bold">Hello, Jhon</h5>
+							</div>
+						</a>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item d-flex align-items-center gap-2 py-2" href="user-profile.html"><i
+								class="material-icons-outlined">person_outline</i>Profile</a>
+						<a class="dropdown-item d-flex align-items-center gap-2 py-2" href="settings.html">
+							<i class="material-icons-outlined">local_bar</i>Setting</a>
+						<a class="dropdown-item d-flex align-items-center gap-2 py-2" href="../index.html">
+							<i class="material-icons-outlined">dashboard</i>Dashboard</a>
+
+						<hr class="dropdown-divider">
+						<a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+								class="material-icons-outlined">power_settings_new</i>Logout</a>
+					</div>
+				</li>
+			</ul>
+
+		</nav>
+	</header>
+	<!--end top header-->
+
+
+	<!--start sidebar-->
+	<aside class="sidebar-wrapper" data-simplebar="true">
+		<div class="sidebar-header justify-content-center">
+			<div class="logo-icon">
+				<img src="../assets/images/logo1.png" class="logo-img" alt="">
+			</div>
+			<div class="logo-name flex-grow-1">
+				<h5 class="mb-0">LE PORTAL</h5>
+			</div>
+
+			<div class="sidebar-close">
+				<span class="material-icons-outlined">close</span>
+			</div>
+		</div>
+		<div class="sidebar-nav">
+			<ul class="metismenu" id="sidenav">
+				<li>
+					<a href="../index.html">
+						<div class="parent-icon"><i class="material-icons-outlined">home</i>
+						</div>
+						<div class="menu-title">Dashboard</div>
+					</a>
+
+				</li>
+				<li>
+					<a href="Analytical Dashboard.html">
+						<div class="parent-icon">
+							<span class="material-icons-outlined">
+								table_chart
+							</span>
+						</div>
+						<div class="menu-title">Analytical Dashboard </div>
+					</a>
+				</li>
+				<li>
+					<a href="Real Time Dashboard.html">
+						<div class="parent-icon">
+							<span class="material-icons-outlined">
+								timeline
+							</span>
+						</div>
+						<div class="menu-title">Real Time Dashboard</div>
+					</a>
+				</li>
+				<li>
+					<a href="Operator.html">
+						<div class="parent-icon">
+							<span class="material-icons-outlined">
+								contact_phone
+							</span>
+						</div>
+						<div class="menu-title">Operator</div>
+					</a>
+				</li>
+
+				<li>
+					<a href="Operators Information.html">
+						<div class="parent-icon">
+							<span class="material-icons-outlined">
+								badge
+							</span>
+						</div>
+						<div class="menu-title">Operators Information</div>
+					</a>
+				</li>
+
+				<li class="menu-label">Others</li>
+				<li>
+					<a class="has-arrow" href="javascript:;">
+						<div class="parent-icon">
+							<i class="material-icons-outlined">face_5</i>
+						</div>
+						<div class="menu-title">Menu Levels</div>
+					</a>
+					<ul>
+						<li><a class="has-arrow" href="javascript:;"><i
+									class="material-icons-outlined">arrow_right</i>Level
+								One</a>
+							<ul>
+								<li><a class="has-arrow" href="javascript:;"><i
+											class="material-icons-outlined">arrow_right</i>Level
+										Two</a>
+									<ul>
+										<li><a href="javascript:;"><i
+													class="material-icons-outlined">arrow_right</i>Level Three</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascrpt:;">
+						<div class="parent-icon"><i class="material-icons-outlined">description</i>
+						</div>
+						<div class="menu-title">Documentation</div>
+					</a>
+				</li>
+				<li>
+					<div class="menu-title"><a class="d-flex align-items-center gap-2" href="javascript:;"><i
+								class="material-icons-outlined">power_settings_new</i>Logout</a>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</aside>
+	<!--end sidebar-->
+
+	<!--start main wrapper-->
+	<main class="main-wrapper">
+		<div class="main-content">
+			<!--breadcrumb-->
+			<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+				<div class="breadcrumb-title pe-3">Operator</div>
+				<div class="ps-3">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb mb-0 p-0">
+							<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Form Layouts</li>
+						</ol>
+					</nav>
+				</div>
+				<div class="ms-auto">
+					<div class="btn-group">
+						<button type="button" class="btn text-white btn-primary">Settings</button>
+						<button type="button"
+							class="btn text-white btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
+							data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
+								href="javascript:;">Action</a>
+							<a class="dropdown-item" href="javascript:;">Another action</a>
+							<a class="dropdown-item" href="javascript:;">Something else here</a>
+							<div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
+								link</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end breadcrumb-->
+			<!-- Video Section -->
+			<div class="container-fluid operator ">
+				<div class="incoming my-4">
+					<div class="header">
+						INCOMING CALL
+					</div>
+
+					<!-- Caller Info -->
+					<div class="caller-info">
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="flex">
+								<div class="small">Caller no:</div>
+								<div class="caller-number">+443302010334</div>
+							</div>
+							<div class="flex">
+								<!-- Action Buttons -->
+								<div class="d-flex justify-content-end gap-2 p-2">
+									<button class="btn btn-wrong-call">
+										<i class="fas fa-times me-1"></i> Wrong Call
+									</button>
+									<button class="btn btn-language-line">
+										<i class="fas fa-phone me-1"></i> Call Language Line
+									</button>
+									<button class="btn btn-complete-call">
+										<i class="fas fa-phone me-1"></i> Complete Call
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Header -->
+
+
+				<div class="row gap-2 flex-nowrap">
+					<!-- Video Area -->
+					<div class="col-7 video-container">
+						<!-- Main Video -->
+						<img src="https://placehold.co/800x600" alt="Main video" class="main-video">
+						<div class="video-overlay">24:01:45</div>
+						<div class="name-overlay">Adam Joseph</div>
+
+						<!-- Thumbnails -->
+						<div class="thumbnails">
+							<div class="thumbnail">
+								<img src="https://placehold.co/130x90" alt="Your video">
+								<div class="thumbnail-name">You</div>
+							</div>
+							<div class="thumbnail">
+								<img src="https://placehold.co/130x90" alt="Cassie's video">
+								<div class="thumbnail-name">Cassie Jung</div>
+							</div>
+						</div>
+
+						<!-- Call Controls -->
+						<div class="call-controls">
+							<button class="btn btn-primary btn-circle">
+								<i class="fas fa-microphone"></i>
+							</button>
+							<button class="btn btn-light btn-circle">
+								<i class="fas fa-ellipsis-h"></i>
+							</button>
+							<button class="btn btn-end-call">End Call</button>
+							<button class="btn btn-primary btn-circle">
+								<i class="fas fa-file-alt"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- Right Panel -->
+					<div class="col-5 d-flex flex-column fixed-scroll">
+
+						<div class="client-info my-4">
+							<div class="client-header mb-4">
+								<h1>CLIENT INFORMATION</h1>
+							</div>
+
+							<form id="clientForm" class="needs-validation" novalidate>
+								<!-- Booking Reference -->
+								<div class="d-flex justify-content-between align-items-center mb-4">
+									<div class="d-flex align-items-center gap-2">
+										<label>Booking Reference:</label>
+										<input class="reference-number" placeholder="103105">
+									</div>
+									<button type="button" class="btn btn-outline-secondary copy-btn">⎘</button>
+								</div>
+
+								<!-- Access Code -->
+								<div class="mb-4">
+									<label class="form-label d-flex align-items-center gap-2">
+										Please enter the access code?
+										<span class="verified-badge">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+												stroke="currentColor" stroke-width="2">
+												<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+												<polyline points="22 4 12 14.01 9 11.01"></polyline>
+											</svg>
+											Verified Client
+										</span>
+									</label>
+									<input type="text" class="form-control bg-light" value="50358001">
+								</div>
+
+								<!-- Organization -->
+								<div class="mb-4">
+									<label class="form-label">
+										Can you confirm your organization name?
+										<span class="text-danger">*</span>
+									</label>
+									<input type="text" class="form-control bg-light" value="Staging Client" readonly>
+								</div>
+
+								<!-- Department -->
+								<div class="mb-4">
+									<label class="form-label">
+										Can you confirm your department name?
+										<span class="text-danger">*</span>
+									</label>
+									<input type="text" class="form-control bg-light" value="Demo User" readonly>
+								</div>
+
+								<!-- Full Name -->
+								<div class="mb-4">
+									<label class="form-label">Can you confirm your full name?</label>
+									<input type="text" class="form-control" placeholder="Enter Full Name">
+								</div>
+
+								<!-- Language -->
+								<div class="mb-4">
+									<label class="form-label">
+										What language do you require?
+										<span class="text-danger">*</span>
+									</label>
+									<select class="form-select">
+										<option selected>Arabic - All or Any</option>
+										<option>Spanish</option>
+										<option>French</option>
+										<option>Mandarin</option>
+									</select>
+								</div>
+
+								<!-- Gender -->
+								<div class="mb-4">
+									<label class="form-label">
+										Do you have a gender preference?
+										<span class="text-danger">*</span>
+									</label>
+									<select class="form-select">
+										<option selected>Any</option>
+										<option>Male</option>
+										<option>Female</option>
+									</select>
+								</div>
+
+								<!-- Third Party -->
+								<div class="mb-4">
+									<label class="form-label">
+										Do you require a third party dial out?
+										<span class="text-danger">*</span>
+									</label>
+									<div class="d-flex gap-4">
+										<div class="form-check">
+											<input class="form-check-input" type="radio" name="dialout" id="yes"
+												checked>
+											<label class="form-check-label" for="yes">Yes</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" name="dialout" id="no">
+											<label class="form-check-label" for="no">No</label>
+										</div>
+									</div>
+								</div>
+
+								<!-- Submit Button -->
+								<button type="submit" class="btn search-btn">
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2">
+										<circle cx="11" cy="11" r="8"></circle>
+										<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+									</svg>
+									Search Interpreters
+								</button>
+							</form>
+						</div>
+						<!-- Tabs -->
+						<div class="tab-container my-4">
+							<div class="tab-header">
+								<button class="custom-tab active" id="registered-tab">REGISTERED</button>
+								<button class="custom-tab" id="non-registered-tab">NON REGISTERED</button>
+							</div>
+
+							<div class="tab-content p-2">
+								<div id="registered-content" class="tab-pane active">
+
+									<input type="text" class="form-control mb-2"
+										placeholder="Search interpreter by name, Id card no. or qualification">
+
+									<div class="interpreter-list">
+
+
+										<!-- Interpreter Items -->
+										<div class="interpreter-item">
+											<div>
+												<span class="status-dot"></span>
+												<span class="interpreter-name">ABDULLAH ABBAS (10240) (ADVANCED)</span>
+											</div>
+											<div>
+												<button class="btn btn-success btn-sm">
+													<i class="fas fa-phone"></i>
+												</button>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-file-alt"></i>
+												</button>
+											</div>
+										</div>
+										<div class="interpreter-item">
+											<div>
+												<span class="status-dot"></span>
+												<span class="interpreter-name">ABDULLAH ABBAS (10240) (ADVANCED)</span>
+											</div>
+											<div>
+												<button class="btn btn-success btn-sm">
+													<i class="fas fa-phone"></i>
+												</button>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-file-alt"></i>
+												</button>
+											</div>
+										</div>
+										<div class="interpreter-item">
+											<div>
+												<span class="status-dot"></span>
+												<span class="interpreter-name">ABDULLAH ABBAS (10240) (ADVANCED)</span>
+											</div>
+											<div>
+												<button class="btn btn-success btn-sm">
+													<i class="fas fa-phone"></i>
+												</button>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-file-alt"></i>
+												</button>
+											</div>
+										</div>
+										<div class="interpreter-item">
+											<div>
+												<span class="status-dot"></span>
+												<span class="interpreter-name">ABDULLAH ABBAS (10240) (ADVANCED)</span>
+											</div>
+											<div>
+												<button class="btn btn-success btn-sm">
+													<i class="fas fa-phone"></i>
+												</button>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-file-alt"></i>
+												</button>
+											</div>
+										</div>
+										<div class="interpreter-item">
+											<div>
+												<span class="status-dot"></span>
+												<span class="interpreter-name">ABDULLAH ABBAS (10240) (ADVANCED)</span>
+											</div>
+											<div>
+												<button class="btn btn-success btn-sm">
+													<i class="fas fa-phone"></i>
+												</button>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-file-alt"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div id="non-registered-content" class="tab-pane" style="display: none;">
+									<input type="text" class="form-control"
+										placeholder="Search interpreter by name, Id card no. or qualification">
+								</div>
+							</div>
+						</div>
+
+						<!-- Services Users Section -->
+						<div class="mt-auto my-4">
+							<div class="section-header">SERVICES USERS</div>
+							<div class="section-content d-flex align-items-center gap-2">
+								<button class="btn btn-outline-secondary btn-sm">
+									<i class="fas fa-plus"></i>
+								</button>
+								<input type="text" class="form-control"
+									placeholder="Search interpreter by name, Id card no. or qualification">
+								<button class="btn btn-success d-flex align-items-center gap-1">
+									<i class="fas fa-phone me-1"></i> Call
+								</button>
+							</div>
+							<div class="table-header">
+								<div>PHONE NUMBER (S)</div>
+								<div>ACTIONS</div>
+							</div>
+						</div>
+
+						<!-- Guests Section -->
+						<div class="my-4">
+							<div class="section-header">GUESTS</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!--end main wrapper-->
+
+
+	<!--start overlay-->
+	<div class="overlay btn-toggle"></div>
+	<!--end overlay-->
+
+
+	<!--start footer-->
+	<footer class="page-footer">
+		<p class="mb-0">Copyright © 2024. All right reserved.</p>
+	</footer>
+	<!--top footer-->
+
+
+
+
+
+	<!--start switcher-->
+	<button
+		class="btn text-white btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2"
+		type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop">
+		<i class="material-icons-outlined">tune</i>Customize
+	</button>
+
+	<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="staticBackdrop">
+		<div class="offcanvas-header border-bottom h-70">
+			<div class="">
+				<h5 class="mb-0">Theme Customizer</h5>
+				<p class="mb-0">Customize your theme</p>
+			</div>
+			<a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="offcanvas">
+				<i class="material-icons-outlined">close</i>
+			</a>
+		</div>
+		<div class="offcanvas-body">
+			<div>
+				<p>Theme variation</p>
+
+				<div class="row g-3">
+					<div class="col-12 col-xl-6">
+						<input type="radio" class="btn-check" name="theme-options" id="BlueTheme" checked>
+						<label
+							class="btn text-white btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
+							for="BlueTheme">
+							<span class="material-icons-outlined">contactless</span>
+							<span>Blue</span>
+						</label>
+					</div>
+					<div class="col-12 col-xl-6">
+						<input type="radio" class="btn-check" name="theme-options" id="LightTheme">
+						<label
+							class="btn text-white btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
+							for="LightTheme">
+							<span class="material-icons-outlined">light_mode</span>
+							<span>Light</span>
+						</label>
+					</div>
+					<div class="col-12 col-xl-6">
+						<input type="radio" class="btn-check" name="theme-options" id="DarkTheme">
+						<label
+							class="btn text-white btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
+							for="DarkTheme">
+							<span class="material-icons-outlined">dark_mode</span>
+							<span>Dark</span>
+						</label>
+					</div>
+					<div class="col-12 col-xl-6">
+						<input type="radio" class="btn-check" name="theme-options" id="SemiDarkTheme">
+						<label
+							class="btn text-white btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
+							for="SemiDarkTheme">
+							<span class="material-icons-outlined">contrast</span>
+							<span>Semi Dark</span>
+						</label>
+					</div>
+					<div class="col-12 col-xl-6">
+						<input type="radio" class="btn-check" name="theme-options" id="BoderedTheme">
+						<label
+							class="btn text-white btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
+							for="BoderedTheme">
+							<span class="material-icons-outlined">border_style</span>
+							<span>Bordered</span>
+						</label>
+					</div>
+				</div><!--end row-->
+
+			</div>
+		</div>
+	</div>
+	<!--bootstrap js-->
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+	<!--plugins-->
+	<script src="../assets/js/jquery.min.js"></script>
+	<!--plugins-->
+	<script src="../assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="../assets/plugins/metismenu/metisMenu.min.js"></script>
+	<script src="../assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="../assets/js/main.js"></script>
+	<script>
+		$(document).ready(function () {
+			// Tab switching functionality
+			$('.operator #registered-tab').click(function () {
+				$(this).addClass('active');
+				$('.operator #non-registered-tab').removeClass('active');
+				$('.operator #registered-content').show();
+				$('.operator #non-registered-content').hide();
+			});
+
+			$('.operator #non-registered-tab').click(function () {
+				$(this).addClass('active');
+				$('.operator #registered-tab').removeClass('active');
+				$('.operator #non-registered-content').show();
+				$('.operator #registered-content').hide();
+			});
+
+			// End Call button functionality
+			$('.operator .btn-end-call').click(function () {
+				alert('Call ended');
+			});
+		});
+	</script>
+</body>
+
+</html>

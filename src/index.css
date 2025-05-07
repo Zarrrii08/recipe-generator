@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+p{
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+ li{
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+h1{
+    font-size: 2.5rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+h2{
+    font-size: 2rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
